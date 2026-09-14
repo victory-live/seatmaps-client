@@ -6,7 +6,7 @@
   },
   "dependencies": {
     "@-/mock-data": "workspace:*",
-    "@ticketevolution/seatmaps-client": "workspace:*",
+    "@victory-live/seatmaps-client": "workspace:*",
     "serve": "^14.2.3"
   },
   "devDependencies": {

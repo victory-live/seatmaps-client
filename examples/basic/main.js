@@ -1,4 +1,4 @@
-import { Tevomaps } from '@ticketevolution/seatmaps-client'
+import { Tevomaps } from '@victory-live/seatmaps-client'
 import ticketGroups from '@-/mock-data/data/ticket-groups-1591449.json'
 
 window.seatmap = new Tevomaps({

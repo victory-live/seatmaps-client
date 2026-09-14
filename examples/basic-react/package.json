@@ -8,7 +8,7 @@
     "@-/mock-data": "workspace:*",
     "@types/react": "19.1.9",
     "@types/react-dom": "19.1.7",
-    "@ticketevolution/seatmaps-client": "workspace:*",
+    "@victory-live/seatmaps-client": "workspace:*",
     "react": "19.1.1",
     "react-dom": "19.1.1"
   },

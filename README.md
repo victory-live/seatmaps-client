@@ -4,17 +4,20 @@
 
 <h1 align="center">Ticket Evolution Seatmaps</h1>
 
+> 📦 **Package renamed**  
+> This library is now published as **`@victory-live/seatmaps-client`**. It was previously published as `@ticketevolution/seatmaps-client`; versions up to `5.0.0` remain installable under the old name but receive no further updates. Switch the dependency name in your `package.json` and your imports — the API is unchanged.
+
 > ⚠️ **React Compatibility Notice**  
-> - Use `^3.5.1` if your app is on **React 18**  
-> - Use `^5.0.0` if your app is on **React 19+**
+> - Use `@victory-live/seatmaps-client` (`^5.1.0`) if your app is on **React 19+**
+> - Use `@ticketevolution/seatmaps-client@^3.5.1` (legacy name) if your app is on **React 18**  
 > - For non-React apps, **do not use v4.0.0**.  
-> - Use `3.5.1` or `^5.0.0`.
+> - Use `@ticketevolution/seatmaps-client@3.5.1` or `@victory-live/seatmaps-client@^5.1.0`.
 
 > ⚠️ **Breaking Change in v5.0.0**  
 > The `.build()` method now returns a **Promise** instead of directly returning the API. You must use `await` or `.then()` to access the seatmap API.
 
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
-[![Known Vulnerabilities](https://snyk.io/test/github/ticketevolution/seatmaps-client/badge.svg?targetFile=package.json)](https://snyk.io/test/github/ticketevolution/seatmaps-client?targetFile=package.json)
+[![Known Vulnerabilities](https://snyk.io/test/github/victory-live/seatmaps-client/badge.svg?targetFile=package.json)](https://snyk.io/test/github/victory-live/seatmaps-client?targetFile=package.json)
 
 A client side JavaScript library that enables users to view seatmaps for available tickets on Ticket Evolution by:
 
@@ -28,6 +31,8 @@ _Note: Sections will not color and you will not be able to highlight/toggle sect
 After instantiation, a [public API](#public-api) is available with a limited number of functions to interact with the map.
 
 **Help:** [Ticket Evolution](http://www.ticketevolution.com/contact-us/)
+
+Development setup lives in [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md).
 
 # Installation and Usage Options
 
@@ -58,7 +63,7 @@ After instantiation, a [public API](#public-api) is available with a limited num
   </head>
   <body>
     <div id="my-map"></div>
-    <script src="https://cdn.jsdelivr.net/npm/@ticketevolution/seatmaps-client/dist/bundle.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@victory-live/seatmaps-client/dist/bundle.js"></script>
     <script>
       // create a new seatmap
       (async () => {
@@ -114,7 +119,16 @@ After instantiation, a [public API](#public-api) is available with a limited num
 
 ### 1. Install via `npm` or `yarn`
 
-For React <19:
+For React 19+:
+```sh
+npm install @victory-live/seatmaps-client
+
+# or
+
+yarn add @victory-live/seatmaps-client
+```
+
+For React <19 (legacy package name, no longer updated):
 ```sh
 npm install @ticketevolution/seatmaps-client@^3.5.1
 
@@ -123,23 +137,14 @@ npm install @ticketevolution/seatmaps-client@^3.5.1
 yarn add @ticketevolution/seatmaps-client@^3.5.1
 ```
 
-For React 19+:
-```sh
-npm install @ticketevolution/seatmaps-client@^5.0.0
-
-# or
-
-yarn add @ticketevolution/seatmaps-client@^5.0.0
-```
-
-### 2. Create a script that includes `@ticketevolution/seatmaps-client`
+### 2. Create a script that includes `@victory-live/seatmaps-client`
 
 **For v5.0.0+ (React 19+):**
 
 ```js
 // main.js
 
-import { SeatmapFactory } from "@ticketevolution/seatmaps-client";
+import { SeatmapFactory } from "@victory-live/seatmaps-client";
 
 // create a new seatmap
 const seatmap = new SeatmapFactory({
@@ -168,7 +173,7 @@ if (seatmapApi) {
 ```js
 // main.js
 
-import { SeatmapFactory } from "@ticketevolution/seatmaps-client";
+import { SeatmapFactory } from "@victory-live/seatmaps-client";
 
 // create a new seatmap
 const seatmap = new SeatmapFactory({
@@ -194,7 +199,7 @@ seatmapApi.highlightSection("lower level corner 104");
 
 ```tsx
 import { createRoot } from "react-dom/client";
-import { TicketMap } from "@ticketevolution/seatmaps-client";
+import { TicketMap } from "@victory-live/seatmaps-client";
 
 const rootEl = document.getElementById("my-map");
 if (!rootEl) {

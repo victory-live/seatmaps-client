@@ -1,4 +1,4 @@
-import { Tevomaps } from '@ticketevolution/seatmaps-client'
+import { Tevomaps } from '@victory-live/seatmaps-client'
 
 window.seatmap = new Tevomaps({
   venueId: "1",
