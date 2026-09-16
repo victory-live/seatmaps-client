@@ -1,0 +1,19 @@
+# This file is managed by Terraform (github-infra). Do not edit manually.
+name: CodeQL Analysis
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: '17 9 * * 1'
+
+jobs:
+  codeql:
+    uses: victory-live/ci-workflows/.github/workflows/shared-codeql-analysis.yml@v1
+    secrets: inherit
+    permissions:
+      actions: read
+      security-events: write
+      contents: read
+      packages: read
