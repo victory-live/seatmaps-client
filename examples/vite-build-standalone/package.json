@@ -10,7 +10,7 @@
     "serve": "^14.2.3"
   },
   "devDependencies": {
-    "vite": "4.4.11"
+    "vite": "6.4.3"
   },
   "version": null
 }
