@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# This file is managed by Terraform (github-infra). Do not edit manually.
+#
+# Prevents direct commits to protected branches.
+# To enable: git config core.hooksPath .githooks
+
+protected_branches="^(main)$"
+current_branch=$(git symbolic-ref --short HEAD 2>/dev/null)
+
+if [[ "$current_branch" =~ $protected_branches ]]; then
+  echo "ERROR: Direct commits to '$current_branch' are not allowed."
+  echo "Please create a feature branch and open a pull request."
+  echo ""
+  echo "  git checkout -b my-feature-branch"
+  echo ""
+  exit 1
+fi

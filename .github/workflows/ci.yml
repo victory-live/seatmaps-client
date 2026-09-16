@@ -1,0 +1,66 @@
+# This file is managed by Terraform (github-infra). Do not edit manually.
+name: CI
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
+jobs:
+  security-audit:
+    uses: victory-live/ci-workflows/.github/workflows/package-security-node.yml@v1
+    with:
+      node_version: '20'
+      package_manager: 'pnpm'
+      install_command: "corepack prepare pnpm@8.15.9 --activate \u0026\u0026 pnpm install --frozen-lockfile"
+    permissions:
+      contents: read
+
+  node-lint:
+    uses: victory-live/ci-workflows/.github/workflows/package-lint-node.yml@v1
+    with:
+      node_version: '20'
+      package_manager: 'pnpm'
+      lint_command: "pnpm run lint"
+      type_check_command: "pnpm run build \u0026\u0026 pnpm run check-ts"
+      install_command: "corepack prepare pnpm@8.15.9 --activate \u0026\u0026 pnpm install --frozen-lockfile"
+    permissions:
+      contents: read
+
+  node-tests:
+    uses: victory-live/ci-workflows/.github/workflows/package-test-node.yml@v1
+    with:
+      team: '@victory-live/b2c'
+      repo_type: 'package'
+      service_name: seatmaps-client
+      node_version: '20'
+      package_manager: 'pnpm'
+      service_language: javascript
+      coverage_minimum: '0'
+      coverage_directory: packages/seatmaps-client/coverage
+      retention_branches: '["main"]'
+      test_command: "pnpm --filter ./packages/seatmaps-client test -- --coverage --coverageReporters=json-summary --coverageReporters=text"
+      install_command: "corepack prepare pnpm@8.15.9 --activate \u0026\u0026 pnpm install --frozen-lockfile"
+    secrets:
+      CI_AWS_ROLE_ARN: ${{ secrets.CI_AWS_ROLE_ARN }}
+      CI_AWS_REGION: ${{ secrets.CI_AWS_REGION }}
+      CI_COVERAGE_S3_BUCKET: ${{ secrets.CI_COVERAGE_S3_BUCKET }}
+      DD_API_KEY: ${{ secrets.DD_API_KEY }}
+    permissions:
+      id-token: write
+      contents: read
+
+  notify:
+    if: always() && github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: [security-audit, node-lint, node-tests]
+    uses: victory-live/ci-workflows/.github/workflows/shared-notify-slack.yml@v1
+    with:
+      service_name: seatmaps-client
+      status: ${{ (needs.security-audit.result == 'success' && needs.node-lint.result == 'success' && needs.node-tests.result == 'success') && 'passed' || 'failed' }}
+      total_jobs: 3
+      passed_jobs: ${{ needs.security-audit.result }},${{ needs.node-lint.result }},${{ needs.node-tests.result }}
+    secrets:
+      SLACK_CI_WEBHOOK_URL: ${{ secrets.SLACK_CI_WEBHOOK_URL }}

@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# This file is managed by Terraform (github-infra). Do not edit manually.
+#
+# Prevents direct pushes to protected branches.
+# To enable: git config core.hooksPath .githooks
+
+protected_branches="^refs/heads/(main)$"
+
+while read local_ref local_sha remote_ref remote_sha; do
+  if [[ "$remote_ref" =~ $protected_branches ]]; then
+    branch="${BASH_REMATCH[1]}"
+    echo "ERROR: Direct pushes to '$branch' are not allowed."
+    echo "Please create a feature branch and open a pull request."
+    echo ""
+    echo "  git checkout -b my-feature-branch"
+    echo "  git push -u origin my-feature-branch"
+    echo "  gh pr create"
+    echo ""
+    exit 1
+  fi
+done
+
+exit 0
