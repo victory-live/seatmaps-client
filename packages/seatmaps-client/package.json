@@ -1,5 +1,5 @@
 {
-  "name": "@ticketevolution/seatmaps-client",
+  "name": "@victory-live/seatmaps-client",
   "version": "5.0.0",
   "private": false,
   "publishConfig": {
@@ -13,9 +13,11 @@
     "tickets",
     "seating chart"
   ],
-  "homepage": "https://github.com/ticketevolution/seatmaps-client#readme",
-  "bugs": "https://github.com:ticketevolution/seatmaps-client/issues",
-  "repository": "github:ticketevolution/seatmaps-client",
+  "homepage": "https://www.npmjs.com/package/@victory-live/seatmaps-client",
+  "bugs": {
+    "url": "https://www.ticketevolution.com/contact-us/"
+  },
+  "repository": "github:victory-live/seatmaps-client",
   "author": "Ticket Evolution, Inc.",
   "license": "MIT",
   "main": "./cjs/index.js",

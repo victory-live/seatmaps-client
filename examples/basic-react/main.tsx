@@ -1,5 +1,5 @@
 import {createRoot } from 'react-dom/client';
-import { TicketMap } from '@ticketevolution/seatmaps-client'
+import { TicketMap } from '@victory-live/seatmaps-client'
 import ticketGroups from '@-/mock-data/data/ticket-groups-1591449.json'
 
 const rootEl = document.getElementById('map');
