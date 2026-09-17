@@ -13,8 +13,10 @@
     "tickets",
     "seating chart"
   ],
-  "homepage": "https://github.com/victory-live/seatmaps-client#readme",
-  "bugs": "https://github.com/victory-live/seatmaps-client/issues",
+  "homepage": "https://www.npmjs.com/package/@victory-live/seatmaps-client",
+  "bugs": {
+    "url": "https://www.ticketevolution.com/contact-us/"
+  },
   "repository": "github:victory-live/seatmaps-client",
   "author": "Ticket Evolution, Inc.",
   "license": "MIT",
