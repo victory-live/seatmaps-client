@@ -41,6 +41,7 @@ jobs:
       service_language: javascript
       coverage_minimum: '0'
       coverage_directory: packages/seatmaps-client/coverage
+      auto_ratchet_coverage: false
       retention_branches: '["main"]'
       test_command: "pnpm --filter ./packages/seatmaps-client test -- --coverage --coverageReporters=json-summary --coverageReporters=text"
       install_command: "corepack prepare pnpm@8.15.9 --activate \u0026\u0026 pnpm install --frozen-lockfile"
@@ -48,6 +49,8 @@ jobs:
       CI_AWS_ROLE_ARN: ${{ secrets.CI_AWS_ROLE_ARN }}
       CI_AWS_REGION: ${{ secrets.CI_AWS_REGION }}
       CI_COVERAGE_S3_BUCKET: ${{ secrets.CI_COVERAGE_S3_BUCKET }}
+      VL_GITHUB_TOKEN_GENERATOR_APP_ID: ${{ secrets.VL_GITHUB_TOKEN_GENERATOR_APP_ID }}
+      VL_GITHUB_TOKEN_GENERATOR_PRIVATE_KEY: ${{ secrets.VL_GITHUB_TOKEN_GENERATOR_PRIVATE_KEY }}
       DD_API_KEY: ${{ secrets.DD_API_KEY }}
     permissions:
       id-token: write
